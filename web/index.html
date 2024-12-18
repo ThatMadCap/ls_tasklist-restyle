@@ -4,40 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" />
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap">
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        yume_white: '#F2F2F2',
+                        yume_grey: '#C1C1C1',
+                        yume_black2: '#171717E6',
+                        yume_pink: '#FE247B',
+                        yume_blue: '#2B78FC',
+                    }
+                },
+                fontFamily: {
+                    montserrat: ['Montserrat', 'sans-serif'],
+                },
+            }
+        }
+    </script>
 
     <style>
         .textShadow {
-            text-shadow: 0px 0px 15px rgb(2 132 199);
+            text-shadow: 0px 0px 15px yume_black2;
         }
 
         .boxShadow {
-            box-shadow: 0 0px 10px 2px rgb(2 132 199)
+            box-shadow: 0 0px 10px 2px yume_black2;
         }
     </style>
 </head>
 
-<body class="h-screen w-screen select-none">
+<body class="h-screen w-screen select-none font-montserrat">
     <div id="app" class="h-full w-full flex justify-end items-center pl-5">
         <div v-if="showed" class="w-[20%] m-5 px-3 py-5  md:w-[20%] lg:w-[15%]">
-            <div class="text-center">
-                <p class="text-sky-600 px-2 py-1 z-20 text-lg font-semibold textShadow">
-                    {{title}}
-                    <span v-if="showNumberOfTask">{{currentTaskAmount}}/{{maximumTask}}</span>
-                </p>
+            <div class="flex justify-center">
+                <div class="text-center bg-yume_black2 rounded mx-5 border border-yume_grey flex flex-col justify-center items-center text-yume_white gap-2 w-auto">
+                    <p class="text-yume_white px-6 py-2 z-20 text-xl font-bold textShadow">
+                        {{title}}
+                        <span v-if="showNumberOfTask">{{currentTaskAmount}}/{{maximumTask}}</span>
+                    </p>
+                </div>
             </div>
 
             <div
-                class="m-1 mx-5 my-3 text-center border-y-0 border-x-0 border-b-2 border-[#242424]/80 relative flex flex-col justify-center items-center">
-                <div class="h-[4px] bg-sky-600 absolute z-10 boxShadow transition-width duration-500 east-in-out"
-                    :class="dynamicBar ? `w-[${barWidth}%]` : 'w-[40%]'"></div>
+                class="m-1 mx-5 my-3 text-center border-y-0 border-x-0 border-b-2 border-yume_white relative flex flex-col justify-center items-center">
+                <div class="h-[6px] bg-gradient-to-r from-yume_blue to-yume_pink absolute z-10 boxShadow transition-width duration-500 ease-in-out" 
+                :class="dynamicBar ? `w-[${barWidth}%]` : 'w-[40%]'"></div>
             </div>
 
-            <div
-                class="text-center bg-[#242424]/50 rounded mx-5 py-3 px-2 border border-[#242424]/50 flex flex-col justify-center items-center text-neutral-200 gap-2 ">
+            <div class="text-center bg-yume_black2 rounded mx-5 py-3 px-3 font-light border border-yume_grey flex flex-col justify-center items-center text-sm text-yume_white gap-2">
                 <div v-for="(item, index) in taskList" :key="index"
-                    :class="[item.completed ? 'line-through decoration-netural-200 decoration-1' : '']">
+                    :class="[item.completed ? 'line-through decoration-yume_white decoration-2' : '']">
                     <span v-if="item.icon" class="mr-2">
                         <i :class="item.icon"></i>
                     </span>
